@@ -1,0 +1,45 @@
+#include <iostream>
+using std::cout;
+using std::endl;
+using std::cin;
+
+struct ListElement
+{
+	int value;              // value of an element
+	ListElement* pNext;     // Pointer to a list element
+};
+
+ListElement* addFront(ListElement* pList, int v);
+
+void printList(ListElement* p);
+
+int main()
+{
+	int n;
+	ListElement* pList = NULL;
+	cin >> n;
+	while (n > 0) {
+		pList = addFront(pList, n);
+		cin >> n;
+	}
+	printList(pList);
+	return 0;
+}
+
+void printList(ListElement* p)
+{
+	while (p != NULL)
+	{
+		std::cout << p->value;
+		p = p->pNext;
+	}
+	cout << endl;
+}
+
+ListElement* addFront(ListElement* pList, int v)
+{
+	ListElement* p = new ListElement;
+	p->pNext = pList;
+	p->value = v;
+	return p;
+}
