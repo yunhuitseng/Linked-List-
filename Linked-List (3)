@@ -1,0 +1,67 @@
+#include <iostream>
+using std::cout;
+using std::endl;
+using std::cin;
+
+struct ListElement
+{
+	int value;              // value of an element
+	ListElement* pNext;     // Pointer to a list element
+};
+ListElement* insertToList(ListElement* pHead, int v);
+
+void printList(ListElement* p);
+
+int main()
+{
+	int n;
+	ListElement* pHead = NULL;
+	cin >> n;
+	while (n > 0) {
+		pHead = insertToList(pHead, n);
+		cin >> n;
+	}
+	printList(pHead);
+	return 0;
+}
+
+void printList(ListElement* p)
+{
+	while (p != NULL)
+	{
+		std::cout << p->value;
+		p = p->pNext;
+	}
+	cout << endl;
+}
+
+ListElement* insertToList(ListElement* pHead, int v) {
+	ListElement* p = NULL;
+	ListElement* ptr = NULL;
+	if (pHead == NULL) {
+		//the first n ;
+		pHead = new ListElement;
+		pHead->value = v;
+		pHead->pNext = NULL;
+	}
+	else {
+		if (v < pHead->value) {
+			//2nd value<1st value use addformat
+			p = pHead;
+			pHead = new ListElement;
+			pHead->value = v;
+			pHead->pNext = p;
+		}
+		else {
+			p = pHead;
+			while (p->pNext != NULL && v >= p->pNext->value) {
+				p = p->pNext;
+			}
+				ptr = p->pNext;
+				p->pNext = new ListElement;
+				p->pNext->value = v;
+				p->pNext->pNext = ptr;
+		}
+	}
+	return pHead;
+}
